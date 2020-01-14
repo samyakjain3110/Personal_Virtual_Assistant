@@ -5,20 +5,18 @@ import speech_recognition as sr
 import webbrowser
 import os
 import urllib
+import web_browser_automation 
+from web_browser_automation import *
 
-def setup():
+def setup():                                        # basic setup for text to speech
     global engine 
     engine = pyttsx3.init('sapi5')
     global voices 
     voices = engine.getProperty('voices')
 
-def internet_on():
-    print('entered internet_on')
-    try:
-        urllib.request.urlopen('http://216.58.192.142', timeout=1)
-        return True
-    except Exception: 
-        return False    
+def speak(audio):
+    engine.say(audio)
+    engine.runAndWait()    
 
 '''
 rate = engine.getProperty('rate')
@@ -28,10 +26,13 @@ print(rate)
 print(volume)
 print (voice)
 '''
-
-def speak(audio):
-    engine.say(audio)
-    engine.runAndWait()
+def internet_on():                                  # checks whether internet is running or not
+    print('entered internet_on')
+    try:
+        urllib.request.urlopen('http://216.58.192.142', timeout=1)
+        return True
+    except Exception: 
+        return False    
 
 def wish():
     hour = int(datetime.datetime.now().hour)
@@ -44,10 +45,9 @@ def wish():
 
 def takeCommand():
     r = sr.Recognizer()
-    r.pause_threshold = 1
-    r.energy_threshold = 10
+    r.pause_threshold = 1                   # voice input properties can be adjusted 
+    r.energy_threshold = 10                 # as per the environment
     
-    print(r.energy_threshold)
     with sr.Microphone() as source:
          r.adjust_for_ambient_noise(source,duration=1)
          print("listening...")
@@ -55,6 +55,7 @@ def takeCommand():
     try:
         print("Recognizing...")
         query = r.recognize_google(audio,language='en-in')
+        
         print("user said:",query)
     except Exception:
         print("pardon") 
@@ -62,8 +63,8 @@ def takeCommand():
         return "None" 
     return query
 
-if __name__ == "__main__":
-    internet_check = internet_on()      #checks whether internet is running or not
+if __name__ == "__main__":              # main function
+    internet_check = internet_on()      # checks whether internet is running or not
     if internet_check == False:
         print('please check the internet connection') 
         exit()
