@@ -3,6 +3,8 @@ import json
 
 obj = {"location":"None","query":"None","prev_node":"None","base_locatin":"None"}
 
+
+
 def read_data():
     file = open("query.json","r")
     file_data = json.load(file)
