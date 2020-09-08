@@ -8,3 +8,5 @@ Voice controlled features :
 3. Development mode( Vscode, chrome ,last project u worked on)
 4. Access to any file
 5. Utilities such as calculator, music player .
+6. Sleep mode
+7. Application exit
