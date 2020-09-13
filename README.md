@@ -1,4 +1,4 @@
-# Siri-for-my-laptop
+# Personal_Virtual_Assistant
 Virtual Assistant for my laptop
 
 Voice controlled features :
